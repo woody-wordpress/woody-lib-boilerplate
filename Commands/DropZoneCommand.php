@@ -10,7 +10,9 @@ namespace Woody\Lib\DropZone\Commands;
 
 use Woody\App\Container;
 
-// WP_SITE_KEY=superot wp woody:dropzone action
+// WP_SITE_KEY=superot wp woody:dropzone get %key%
+// WP_SITE_KEY=superot wp woody:dropzone set %key% %data% %expired% %action%
+// WP_SITE_KEY=superot wp woody:dropzone delete %key%
 
 class DropZoneCommand
 {
@@ -25,8 +27,18 @@ class DropZoneCommand
         $this->dropZoneManager = $this->container->get('dropzone.manager');
     }
 
-    public function action($args, $assoc_args)
+    public function get($args, $assoc_args)
     {
-        $this->dropZoneManager->action($args, $assoc_args);
+        $this->dropZoneManager->get($key);
+    }
+
+    public function set($args, $assoc_args)
+    {
+        $this->dropZoneManager->set($key, $data, $expired, $action);
+    }
+
+    public function delete($args, $assoc_args)
+    {
+        $this->dropZoneManager->delete($key);
     }
 }
